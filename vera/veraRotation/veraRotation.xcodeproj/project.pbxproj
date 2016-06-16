@@ -40,7 +40,7 @@
 				<key>name</key>
 				<string>openFrameworksLib.xcodeproj</string>
 				<key>path</key>
-				<string>../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj</string>
+				<string>../../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
@@ -173,6 +173,11 @@
 				<string>E4EB6923138AFD0F00A09F29</string>
 				<key>buildSettings</key>
 				<dict>
+					<key>HEADER_SEARCH_PATHS</key>
+					<array>
+						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
+					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
 					<key>COPY_PHASE_STRIP</key>
@@ -226,6 +231,11 @@
 				<string>E4EB6923138AFD0F00A09F29</string>
 				<key>buildSettings</key>
 				<dict>
+					<key>HEADER_SEARCH_PATHS</key>
+					<array>
+						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
+					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
 					<key>COPY_PHASE_STRIP</key>
@@ -361,6 +371,11 @@
 				<string>E4EB6923138AFD0F00A09F29</string>
 				<key>buildSettings</key>
 				<dict>
+					<key>HEADER_SEARCH_PATHS</key>
+					<array>
+						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
+					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>
 					<key>COPY_PHASE_STRIP</key>
@@ -371,7 +386,7 @@
 						<string>$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)</string>
 					</array>
 					<key>FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1</key>
-					<string>"$(SRCROOT)/../../../libs/glut/lib/osx"</string>
+					<string>"$(SRCROOT)/../../../../libs/glut/lib/osx"</string>
 					<key>GCC_DYNAMIC_NO_PIC</key>
 					<string>NO</string>
 					<key>GCC_GENERATE_DEBUGGING_SYMBOLS</key>
@@ -385,7 +400,7 @@
 					<key>INFOPLIST_FILE</key>
 					<string>openFrameworks-Info.plist</string>
 					<key>INSTALL_PATH</key>
-					<string>$(HOME)/Applications</string>
+					<string>/Applications</string>
 					<key>LIBRARY_SEARCH_PATHS</key>
 					<string>$(inherited)</string>
 					<key>PRODUCT_NAME</key>
@@ -404,6 +419,11 @@
 				<string>E4EB6923138AFD0F00A09F29</string>
 				<key>buildSettings</key>
 				<dict>
+					<key>HEADER_SEARCH_PATHS</key>
+					<array>
+						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
+					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>
 					<key>COPY_PHASE_STRIP</key>
@@ -414,7 +434,7 @@
 						<string>$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)</string>
 					</array>
 					<key>FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1</key>
-					<string>"$(SRCROOT)/../../../libs/glut/lib/osx"</string>
+					<string>"$(SRCROOT)/../../../../libs/glut/lib/osx"</string>
 					<key>GCC_GENERATE_DEBUGGING_SYMBOLS</key>
 					<string>YES</string>
 					<key>GCC_MODEL_TUNING</key>
@@ -426,7 +446,7 @@
 					<key>INFOPLIST_FILE</key>
 					<string>openFrameworks-Info.plist</string>
 					<key>INSTALL_PATH</key>
-					<string>$(HOME)/Applications</string>
+					<string>/Applications</string>
 					<key>LIBRARY_SEARCH_PATHS</key>
 					<string>$(inherited)</string>
 					<key>PRODUCT_NAME</key>
@@ -545,10 +565,14 @@
 				<key>shellPath</key>
 				<string>/bin/sh</string>
 				<key>shellScript</key>
-				<string>rsync -aved ../../../libs/fmodex/lib/osx/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME";
-mkdir -p "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/"
+				<string>mkdir -p "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/"
+# Copy default icon file into App/Resources
 rsync -aved "$ICON_FILE" "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/"
-rsync -aved ../../../libs/glut/lib/osx/GLUT.framework "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/"
+# Copy libfmod and change install directory for fmod to run
+rsync -aved ../../../../libs/fmodex/lib/osx/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/";
+install_name_tool -change @executable_path/libfmodex.dylib @executable_path/../Frameworks/libfmodex.dylib "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME";
+# Copy GLUT framework (must remove for AppStore submissions)
+rsync -aved ../../../../libs/glut/lib/osx/GLUT.framework "$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Frameworks/"
 </string>
 			</dict>
 			<key>E4C2427710CC5ABF004149E2</key>
@@ -577,7 +601,7 @@ rsync -aved ../../../libs/glut/lib/osx/GLUT.framework "$TARGET_BUILD_DIR/$PRODUC
 				<key>name</key>
 				<string>CoreOF.xcconfig</string>
 				<key>path</key>
-				<string>../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig</string>
+				<string>../../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
