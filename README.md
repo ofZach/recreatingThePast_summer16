@@ -28,3 +28,6 @@ Additonal topics to reivew if we have time:
 GLITCH / DEFORMATION / Rosa Menkman / Vesulkas
 DATA / Lisa Jevbratt
 INTERFACE / Yugo Nakamura
+
+
+(some examples require these frames: https://dl.dropboxusercontent.com/u/92337283/forSFPC/frames.zip) 
